@@ -57,4 +57,11 @@ class MatchScoreTest {
         String expected = "Match score : Julien: 0 Tester: 0";
         assertEquals(expected, outContent.toString().trim());
     }
+
+    @Test
+    void printWinner() {
+        matchScore.printWinner();
+        String expected = "Game, Set and Match Tester !";
+        assertEquals(expected, outContent.toString().trim());
+    }
 }
