@@ -13,27 +13,33 @@ public class MatchScore {
     }
 
     public void clearGameScores() {
-        playerOne.score().clearGameScore();
-        playerTwo.score().clearGameScore();
+        this.playerOne.score().clearGameScore();
+        this.playerTwo.score().clearGameScore();
     }
 
     public void printGameScore() {
-        System.out.print("Game n°" + ((playerOne.score().getMatchScore() + playerTwo.score().getMatchScore() + 1) + ", "));
-        printGameScoreWithName(playerOne.score().getGameScore(), playerTwo.score().getGameScore());
+        System.out.print("Game n°" + ((this.playerOne.score().getMatchScore() + this.playerTwo.score().getMatchScore() + 1) + ", "));
+        printGameScoreWithName(this.playerOne.score().getGameScore(), this.playerTwo.score().getGameScore());
     }
 
     public void printMatchScore() {
         System.out.println();
         System.out.print("Match score : ");
-        printScore(playerOne.score().getMatchScore(), playerTwo.score().getMatchScore());
+        printScore(this.playerOne.score().getMatchScore(), this.playerTwo.score().getMatchScore());
         System.out.println();
     }
 
+    public void printWinner() {
+        int result = this.playerOne.score().getMatchScore() - this.playerTwo.score().getMatchScore();
+        Player winner = result > 0 ? this.playerOne : this.playerTwo;
+        System.out.println("Game, Set and Match " + winner.name() + " !");
+    }
+
     private void printScore(int playerOneScore, int playerTwoScore) {
-        System.out.println(playerOne.name() + ": " + playerOneScore + " " + playerTwo.name() + ": " + playerTwoScore);
+        System.out.println(this.playerOne.name() + ": " + playerOneScore + " " + this.playerTwo.name() + ": " + playerTwoScore);
     }
 
     private void printGameScoreWithName(int playerOneScore, int playerTwoScore) {
-        System.out.println(playerOne.name() + ": " + MatchPoints.values()[playerOneScore] + " - " + playerTwo.name() + ": " + MatchPoints.values()[playerTwoScore]);
+        System.out.println(this.playerOne.name() + ": " + MatchPoints.values()[playerOneScore] + " - " + this.playerTwo.name() + ": " + MatchPoints.values()[playerTwoScore]);
     }
 }

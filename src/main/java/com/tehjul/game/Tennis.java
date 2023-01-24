@@ -18,15 +18,16 @@ public class Tennis implements TennisGame {
     private final Player playerTwo;
 
     public Tennis(Player playerOne, Player playerTwo) {
-        matchStatus = MatchStatus.PLAYING;
+        this.matchStatus = MatchStatus.PLAYING;
         this.playerOne = playerOne;
         this.playerTwo = playerTwo;
-        matchScore = new MatchScore(playerOne, playerTwo);
+        this.matchScore = new MatchScore(playerOne, playerTwo);
     }
 
     @Override
     public void playMatch() {
         while (!isMatchOver()) playGame();
+        this.matchScore.printWinner();
     }
 
     @Override
@@ -41,22 +42,22 @@ public class Tennis implements TennisGame {
         if (isGameOver()) {
             checkIfMatchIsOver();
             if (!isMatchOver()) {
-                matchScore.clearGameScores();
+                this.matchScore.clearGameScores();
             }
-            matchScore.printMatchScore();
-        } else matchScore.printGameScore();
+            this.matchScore.printMatchScore();
+        } else this.matchScore.printGameScore();
     }
 
     private void evaluatePoint(int pointWinner) {
         switch (pointWinner) {
-            case 1 -> evaluateWinner(playerOne);
-            case 2 -> evaluateWinner(playerTwo);
+            case 1 -> evaluateWinner(this.playerOne);
+            case 2 -> evaluateWinner(this.playerTwo);
             default -> throw new IllegalArgumentException("Number must be 1 or 2");
         }
     }
 
     private void evaluateWinner(Player winner) {
-        Player loser = (winner == playerOne) ? playerTwo : playerOne;
+        Player loser = (winner == this.playerOne) ? this.playerTwo : this.playerOne;
         int loserScore = loser.score().getGameScore();
 
         if (loserScore == ADVANTAGE) {
@@ -78,11 +79,11 @@ public class Tennis implements TennisGame {
     }
 
     private boolean playerOneHasWonMatch() {
-        return playerHasWonMatch(playerOne);
+        return playerHasWonMatch(this.playerOne);
     }
 
     private boolean playerTwoHasWonMatch() {
-        return playerHasWonMatch(playerTwo);
+        return playerHasWonMatch(this.playerTwo);
     }
 
     private boolean playerHasWonMatch(Player player) {
