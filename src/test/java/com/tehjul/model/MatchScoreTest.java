@@ -59,7 +59,7 @@ class MatchScoreTest {
     }
 
     @Test
-    void printWinner() {
+    void testPrintWinner() {
         matchScore.printWinner();
         String expected = "Game, Set and Match Tester !";
         assertEquals(expected, outContent.toString().trim());
